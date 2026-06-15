@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HBomb Camera</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Screen: requesting permission -->
+  <div id="screen-permission" class="screen active">
+    <h1>HBomb Camera</h1>
+    <p>This app needs access to your camera and microphone.</p>
+    <button id="btn-request-permission">Enable Camera &amp; Mic</button>
+  </div>
+
+  <!-- Screen: permission denied guidance -->
+  <div id="screen-denied" class="screen">
+    <h1>Permission Required</h1>
+    <p>Camera or microphone access was blocked. Follow these steps to re-enable:</p>
+    <div class="guide">
+      <h3>Chrome / Edge</h3>
+      <ol>
+        <li>Click the <strong>camera icon</strong> in the address bar (top right of URL bar)</li>
+        <li>Select <strong>Allow</strong> for both Camera and Microphone</li>
+        <li>Reload the page</li>
+      </ol>
+      <h3>macOS System Settings</h3>
+      <ol>
+        <li>Open <strong>System Settings → Privacy &amp; Security → Camera</strong></li>
+        <li>Enable access for your browser</li>
+        <li>Repeat for <strong>Microphone</strong></li>
+        <li>Reload the page</li>
+      </ol>
+      <h3>Windows Settings</h3>
+      <ol>
+        <li>Open <strong>Settings → Privacy → Camera</strong></li>
+        <li>Toggle <strong>Allow apps to access your camera</strong> to On</li>
+        <li>Repeat for <strong>Microphone</strong></li>
+        <li>Reload the page</li>
+      </ol>
+    </div>
+    <button id="btn-retry-permission">Try Again</button>
+  </div>
+
+  <!-- Screen: main app -->
+  <div id="screen-main" class="screen">
+    <div id="camera-area">
+      <video id="webcam" autoplay playsinline muted></video>
+      <canvas id="snapshot" style="display:none"></canvas>
+      <div id="countdown-overlay">
+        <span id="countdown-number"></span>
+      </div>
+      <div id="flash-overlay"></div>
+    </div>
+
+    <div id="prompt-area">
+      <p class="instruction">Say what you want to become or do — e.g. <em>"I want to be in a jungle"</em></p>
+
+      <div id="speech-area">
+        <button id="btn-speak">Hold to Speak</button>
+        <span id="recording-indicator" style="display:none">&#9679; Recording...</span>
+      </div>
+
+      <div id="transcript-area" style="display:none">
+        <label for="transcript-input">Your prompt (edit if needed):</label>
+        <input type="text" id="transcript-input" />
+        <button id="btn-transform">Transform Me</button>
+        <button id="btn-re-record">Re-record</button>
+      </div>
+
+      <div id="no-speech-area" style="display:none">
+        <p>Voice input not supported in this browser. Type your prompt instead:</p>
+        <input type="text" id="manual-input" placeholder="I want to be in a jungle" />
+        <button id="btn-transform-manual">Transform Me</button>
+      </div>
+    </div>
+
+    <div id="loading-area" style="display:none">
+      <p>Transforming... this may take up to 15 seconds.</p>
+    </div>
+
+    <div id="gallery-area" style="display:none">
+      <div class="gallery-header">
+        <p class="gallery-label">Your transformations — tap to view</p>
+        <button id="btn-download-all">Download All</button>
+      </div>
+      <div id="gallery-strip"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" aria-modal="true" role="dialog">
+    <button id="lightbox-close" aria-label="Close">&#x2715;</button>
+    <img id="lightbox-img" alt="Transformed image" />
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

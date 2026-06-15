@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+generated_images/
+.DS_Store
+*.jpg
+*.jpeg
+*.png
+*.gif
